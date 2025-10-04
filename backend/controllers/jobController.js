@@ -31,3 +31,18 @@ exports.getJobById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.matchJob = async (req, res) => {
+  try {
+    const { top_n } = req.body;
+    // Placeholder for matching logic
+    const matchedCandidates = [
+      { resume_id: 'dummy_id_1', score: 0.9, evidence: 'React experience', missing_requirements: ['AWS'] },
+      { resume_id: 'dummy_id_2', score: 0.8, evidence: 'Node.js experience', missing_requirements: ['Docker'] },
+    ];
+
+    res.status(200).json({ matchedCandidates });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
