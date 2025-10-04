@@ -39,3 +39,27 @@ exports.uploadResume = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getResumes = async (req, res) => {
+  const limit = parseInt(req.query.limit) || 10;
+  const offset = parseInt(req.query.offset) || 0;
+
+  try {
+    const resumes = await Resume.find().skip(offset).limit(limit);
+    res.status(200).json(resumes);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getResumeById = async (req, res) => {
+  try {
+    const resume = await Resume.findById(req.params.id);
+    if (!resume) {
+      return res.status(404).json({ message: 'Resume not found' });
+    }
+    res.status(200).json(resume);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
