@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { RiSearch2Line, RiCloseLine } from 'react-icons/ri';
 
 function Search() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
 
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch('http://localhost:5000/api/ask', {
         method: 'POST',
@@ -25,16 +28,30 @@ function Search() {
     }
   };
 
+  const toggleSearch = (e) => {
+    e.preventDefault();
+    setShowSearch(!showSearch);
+  };
+
   return (
-    <div>
+    <div className="container">
       <h2>Search Resumes</h2>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Enter your query"
-      />
-      <button onClick={handleSearch}>Search</button>
+      <form className={`search ${showSearch ? 'show-search' : ''}`} onSubmit={handleSearch}>
+        <input
+          type="search"
+          placeholder="Type something..."
+          className="search__input"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <div className="search__button" onClick={toggleSearch}>
+          {showSearch ? (
+            <RiCloseLine className="ri-close-line search__close" />
+          ) : (
+            <RiSearch2Line className="ri-search-2-line search__icon" />
+          )}
+        </div>
+      </form>
 
       <div>
         {results.map((result, index) => (
