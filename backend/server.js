@@ -17,6 +17,9 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 const resumeRoutes = require('./routes/resumes');
 app.use('/api/resumes', resumeRoutes);
 
+const askRoutes = require('./routes/ask');
+app.use('/api/ask', askRoutes);
+
 app.get('/', (req, res) => {
   res.send('ResumeRAG API');
 });
