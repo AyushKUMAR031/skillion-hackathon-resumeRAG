@@ -1,0 +1,25 @@
+{
+  "name": "resumerag-backend",
+  "version": "1.0.0",
+  "description": "Backend for the ResumeRAG application.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jszip": "^3.10.1",
+    "langchain": "^0.0.159",
+    "mongoose": "^7.3.1",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
