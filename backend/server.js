@@ -20,6 +20,9 @@ app.use('/api/resumes', resumeRoutes);
 const askRoutes = require('./routes/ask');
 app.use('/api/ask', askRoutes);
 
+const jobRoutes = require('./routes/jobs');
+app.use('/api/jobs', jobRoutes);
+
 app.get('/', (req, res) => {
   res.send('ResumeRAG API');
 });
