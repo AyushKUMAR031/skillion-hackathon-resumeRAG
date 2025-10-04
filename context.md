@@ -47,3 +47,5 @@ An AI-based resume search engine + job matcher.
 - **Backend:** Node.js + Express  
 - **Database:** MongoDB  
 - **AI/ML:** OpenAI Embedding API (or Hugging Face) (will discuss this llm thing later)... 
+
+
