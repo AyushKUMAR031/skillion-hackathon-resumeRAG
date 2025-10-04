@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
 function Candidates() {
@@ -31,17 +32,23 @@ function Candidates() {
   }, [id]);
 
   return (
-    <div>
-      <h2>Top Candidates</h2>
-      {candidates.map((candidate, index) => (
-        <div key={index}>
-          <h3>Resume ID: {candidate.resume_id}</h3>
-          <p>Score: {candidate.score}</p>
-          <p>Evidence: {candidate.evidence}</p>
-          <p>Missing Requirements: {candidate.missing_requirements.join(', ')}</p>
-        </div>
-      ))}
-    </div>
+    <section className="candidates" id="candidates">
+        <Container>
+            <Row>
+                <Col>
+                    <h2>Top Candidates</h2>
+                    {candidates.map((candidate, index) => (
+                        <div key={index}>
+                        <h3>Resume ID: {candidate.resume_id}</h3>
+                        <p>Score: {candidate.score}</p>
+                        <p>Evidence: {candidate.evidence}</p>
+                        <p>Missing Requirements: {candidate.missing_requirements.join(', ')}</p>
+                        </div>
+                    ))}
+                </Col>
+            </Row>
+        </Container>
+    </section>
   );
 }
 
