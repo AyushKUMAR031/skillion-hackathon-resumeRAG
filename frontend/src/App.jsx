@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { NavBar } from './components/NavBar';
 import FileUpload from './components/FileUpload';
 import Search from './components/Search';
 import Jobs from './components/Jobs';
@@ -7,23 +8,8 @@ import Candidates from './components/Candidates';
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Upload</Link>
-            </li>
-            <li>
-              <Link to="/search">Search</Link>
-            </li>
-            <li>
-              <Link to="/jobs">Jobs</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <hr />
-
+      <div className="App">
+        <NavBar />
         <Routes>
           <Route path="/" element={<FileUpload />} />
           <Route path="/search" element={<Search />} />

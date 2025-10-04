@@ -1,0 +1,2 @@
+- Vector Embedding : is how we translate things like text, images, and videos, etc into numbers that a computer can understand.
+- Sematic Similarity : Sematic similarity of objects means and concepts can be said by how close they are to each others as points in vector space.
