@@ -7,6 +7,7 @@
 *   **Backend:** Node.js + Express
 *   **Database:** MongoDB
 *   **AI/ML:** OpenAI Embedding API (or Hugging Face)
+*   **Vector Database:** Pinecone
 
 ---
 
@@ -43,7 +44,7 @@
         *   [x] Create a service in the `ml` module to generate embeddings.
     *   [x] **Storage:**
         *   [x] Save the resume file to the `backend/uploads` directory.
-        *   [x] Save the extracted text and embeddings to MongoDB.
+        *   [x] Save the extracted text and embeddings to Pinecone.
 *   [x] **3. Resume Retrieval (`/api/resumes`):**
     *   [x] Implement `GET /api/resumes` to list all resumes with pagination (`limit`, `offset`).
     *   [ ] Implement `GET /api/resumes?q=` for basic text search.
@@ -53,19 +54,20 @@
 
 *   [x] **1. Semantic Search (`/api/ask`):**
     *   [x] Implement `POST /api/ask` in the backend.
-    *   [ ] The backend will call the `ml` module to get embeddings for the query.
-    *   [ ] Perform a vector similarity search against the resume embeddings in MongoDB.
+    *   [x] The backend will call the `ml` module to get embeddings for the query.
+    *   [x] Perform a vector similarity search against the resume embeddings in Pinecone.
     *   [x] Return the top `k` matching resume snippets.
 *   [x] **2. Job & Candidate Matching:**
     *   [x] **Job Model:**
         *   [x] Define `Job` schema in `backend/models/Job.js` (`title`, `description`, `embedding`).
     *   [x] **Job API (`/api/jobs`):**
         *   [x] Implement `POST /api/jobs` to create a new job posting.
+        *   [x] Implement `GET /api/jobs` to retrieve all jobs.
         *   [x] Implement `GET /api/jobs/:id` to retrieve a job.
     *   [x] **Matching Logic (`/api/jobs/:id/match`):**
         *   [x] Implement `POST /api/jobs/:id/match`.
-        *   [ ] The backend will call the `ml` module to get embeddings for the job description.
-        *   [ ] Compare the job description embedding with all resume embeddings.
+        *   [x] The backend will call the `ml` module to get embeddings for the job description.
+        *   [x] Compare the job description embedding with all resume embeddings in Pinecone.
         *   [x] Return the `top_n` best-matching candidates.
 
 #### **Phase 4: Frontend Development (`frontend` directory)**
@@ -94,3 +96,17 @@
 *   [ ] **4. Deployment:**
     *   [ ] Prepare the application for deployment.
     *   [ ] Deploy the backend and frontend to a hosting service.
+
+---
+
+### Extra Features Implemented
+
+*   [x] **Vector Database:** Set up and integrated a Pinecone vector database for storing and searching embeddings.
+*   [x] **UI/UX Improvements:**
+    *   [x] A modern, translucent navbar.
+    *   [x] A consistent background image across all pages.
+    *   [x] Improved styling for forms and content boxes.
+*   [x] **Code Refactoring:**
+    *   [x] Refactored the frontend by merging the `Banner.jsx` component into `Home.jsx`.
+    *   [x] Removed unused CSS.
+*   [x] **Zip File Upload:** Implemented and fixed the zip file upload functionality to handle multiple resumes.

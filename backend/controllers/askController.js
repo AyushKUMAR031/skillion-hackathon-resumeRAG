@@ -13,17 +13,30 @@ exports.ask = async (req, res) => {
 
     const queryRequest = {
       vector: queryEmbedding,
-      topK: k || 5,
+      topK: 50, // Get more results to group from
       includeMetadata: true,
     };
 
     const queryResponse = await pineconeIndex.query(queryRequest);
 
-    const results = queryResponse.matches.map(match => ({
-        resume_id: match.metadata.resume_id,
-        snippet: match.metadata.text,
-        score: match.score,
-    }));
+    const candidates = queryResponse.matches.reduce((acc, match) => {
+        const { resume_id, text, filename } = match.metadata;
+        const { score } = match;
+
+        if (!acc[resume_id] || score > acc[resume_id].score) {
+            acc[resume_id] = {
+                resume_id,
+                score,
+                snippet: text,
+                filename,
+            };
+        }
+        return acc;
+    }, {});
+
+    const results = Object.values(candidates)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, k || 5);
 
 
     res.status(200).json({ results });

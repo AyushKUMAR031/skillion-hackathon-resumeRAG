@@ -423,3 +423,27 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   font-size: 16px;
   line-height: 1.6;
 }
+
+/************ Candidates Component CSS ************/
+.candidates-section .candidate-item {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.candidates-section .candidate-item h3 {
+  font-size: 22px;
+  color: var(--first-color);
+  margin-bottom: 10px;
+}
+
+.candidates-section .candidate-item p {
+  color: var(--text-color-light);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.candidates-section .candidate-item button {
+  margin-top: 10px;
+}

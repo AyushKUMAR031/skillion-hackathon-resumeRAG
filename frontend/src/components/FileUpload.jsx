@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { toast } from 'react-toastify';
 
 function FileUpload() {
   const [file, setFile] = useState(null);
@@ -16,7 +17,7 @@ function FileUpload() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file) {
-      alert("Please select a file");
+      toast.error("Please select a file");
       return;
     }
 
@@ -31,16 +32,16 @@ function FileUpload() {
 
       if (response.ok) {
         const data = await response.json();
-        alert("File uploaded successfully");
+        toast.success("File uploaded successfully");
         console.log(data);
         setFile(null);
         setFileName("No file chosen");
       } else {
-        alert("File upload failed");
+        toast.error("File upload failed");
       }
     } catch (error) {
       console.error("Error uploading file:", error);
-      alert("Error uploading file");
+      toast.error("Error uploading file");
     }
   };
 

@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { NavBar } from './components/NavBar';
 import Home from './components/Home';
 import FileUpload from './components/FileUpload';
@@ -20,6 +22,7 @@ function App() {
             <Route path="/candidates/:id" element={<Candidates />} />
           </Routes>
         </div>
+        <ToastContainer />
       </div>
     </Router>
   );

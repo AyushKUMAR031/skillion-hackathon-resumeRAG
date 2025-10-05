@@ -56,21 +56,46 @@ exports.matchJob = async (req, res) => {
 
     const queryRequest = {
       vector: jobEmbedding,
-      topK: top_n || 5,
+      topK: 50, // Get more results to group from
       includeMetadata: true,
     };
 
     const queryResponse = await pineconeIndex.query(queryRequest);
 
-    const matchedCandidates = queryResponse.matches.map(match => {
-        const missing_requirements = getMissingRequirements(job.description, match.metadata.text);
+    const candidates = queryResponse.matches.reduce((acc, match) => {
+        const { resume_id, text, filename } = match.metadata;
+        const { score } = match;
+
+        if (!acc[resume_id]) {
+            acc[resume_id] = {
+                resume_id,
+                scores: [],
+                chunks: [],
+                filename,
+            };
+        }
+        acc[resume_id].scores.push(score);
+        acc[resume_id].chunks.push(text);
+
+        return acc;
+    }, {});
+
+    const rankedCandidates = Object.values(candidates).map(candidate => {
+        const avgScore = candidate.scores.reduce((a, b) => a + b, 0) / candidate.scores.length;
+        const bestChunk = candidate.chunks.join('\n\n'); // For now, just join the chunks
         return {
-            resume_id: match.metadata.resume_id,
-            score: match.score,
-            evidence: match.metadata.text,
-            missing_requirements,
+            resume_id: candidate.resume_id,
+            filename: candidate.filename,
+            score: avgScore,
+            evidence: bestChunk,
+            missing_requirements: getMissingRequirements(job.description, bestChunk),
         }
     });
+
+    const matchedCandidates = rankedCandidates
+        .sort((a, b) => b.score - a.score)
+        .slice(0, top_n || 5);
+
 
     res.status(200).json({ matchedCandidates });
   } catch (error) {
