@@ -2,6 +2,8 @@ const Resume = require('../models/Resume');
 const pdf = require('pdf-parse');
 const fs = require('fs');
 const JSZip = require('jszip');
+const { generateEmbedding } = require('../../ml/embedding');
+const { initPinecone } = require('../pinecone');
 
 exports.uploadResume = async (req, res) => {
   try {
@@ -29,16 +31,46 @@ exports.uploadResume = async (req, res) => {
 
     const newResume = new Resume({
       filename: req.file.originalname,
-      text: text,
+      text: text, // We can still save the full text for reference
     });
 
     const savedResume = await newResume.save();
 
-    res.status(201).json({ message: 'Resume uploaded and parsed successfully', resume: savedResume });
+    // Chunking and embedding
+    const pineconeIndex = await initPinecone();
+    const chunks = chunkText(text);
+    const vectors = [];
+
+    for (let i = 0; i < chunks.length; i++) {
+      const chunk = chunks[i];
+      const embedding = await generateEmbedding(chunk);
+      vectors.push({
+        id: `${savedResume._id}-chunk-${i}`,
+        values: embedding,
+        metadata: {
+          resume_id: savedResume._id.toString(),
+          chunk_index: i,
+          text: chunk,
+        },
+      });
+    }
+
+    await pineconeIndex.upsert(vectors);
+
+    res.status(201).json({ message: 'Resume uploaded, parsed, and embedded successfully', resume: savedResume });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+function chunkText(text, chunkSize = 800) {
+    const chunks = [];
+    for (let i = 0; i < text.length; i += chunkSize) {
+        chunks.push(text.substring(i, i + chunkSize));
+    }
+    return chunks;
+}
+
 
 exports.getResumes = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;
