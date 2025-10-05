@@ -24,6 +24,8 @@ function FileUpload() {
     const formData = new FormData();
     formData.append("resume", file);
 
+    const toastId = toast.loading("Uploading file...");
+
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/resumes`, {
         method: "POST",
@@ -32,16 +34,16 @@ function FileUpload() {
 
       if (response.ok) {
         const data = await response.json();
-        toast.success("File uploaded successfully");
+        toast.update(toastId, { render: "File uploaded successfully", type: "success", isLoading: false, autoClose: 5000 });
         console.log(data);
         setFile(null);
         setFileName("No file chosen");
       } else {
-        toast.error("File upload failed");
+        toast.update(toastId, { render: "File upload failed", type: "error", isLoading: false, autoClose: 5000 });
       }
     } catch (error) {
       console.error("Error uploading file:", error);
-      toast.error("Error uploading file");
+      toast.update(toastId, { render: "Error uploading file", type: "error", isLoading: false, autoClose: 5000 });
     }
   };
 
