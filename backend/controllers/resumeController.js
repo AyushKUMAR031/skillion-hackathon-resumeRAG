@@ -3,9 +3,9 @@ const pdf = require('pdf-parse');
 const fs = require('fs');
 const JSZip = require('jszip');
 const { initPinecone } = require('../pinecone');
+const { generateEmbedding } = require('../ml/embedding.js');
 
 async function processResume(text, filename) {
-    const { generateEmbedding } = await import('../../ml/embedding.js');
 
     const newResume = new Resume({
         filename,

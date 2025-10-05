@@ -50,7 +50,7 @@ function Home() {
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                 <span className="tagline">Welcome to ResumeRAG</span>
-                <h2>{`Here you can:`} <span className="txt-rotate" dataPeriod="1000" data-rotate='[ "Upload Resumes", "Search Candidates", "Match Jobs" ]'><span className="wrap">{text}</span></span></h2>
+                <h2>{`Here you can:`} <span className="txt-rotate" dataperiod="1000" data-rotate='[ "Upload Resumes", "Search Candidates", "Match Jobs" ]'><span className="wrap">{text}</span></span></h2>
                   <p>ResumeRAG is an AI-powered tool that helps you find the best candidates for your job openings. Upload resumes, search for specific skills, and match candidates to job descriptions with ease.</p>
               </div>}
             </TrackVisibility>

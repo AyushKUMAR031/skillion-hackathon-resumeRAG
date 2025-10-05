@@ -1,8 +1,8 @@
 const { initPinecone } = require('../pinecone');
+const { generateEmbedding } = require('../ml/embedding.js');
 
 exports.ask = async (req, res) => {
   try {
-    const { generateEmbedding } = await import('../../ml/embedding.js');
     const { query, k } = req.body;
     if (!query) {
       return res.status(400).json({ message: 'Query is required' });
@@ -41,6 +41,7 @@ exports.ask = async (req, res) => {
 
     res.status(200).json({ results });
   } catch (error) {
+    console.error('Error in ask function:', error);
     res.status(500).json({ message: error.message });
   }
 };

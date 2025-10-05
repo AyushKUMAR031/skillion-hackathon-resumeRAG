@@ -1,5 +1,6 @@
 const Job = require('../models/Job');
 const { initPinecone } = require('../pinecone');
+const { generateEmbedding } = require('../ml/embedding.js');
 
 exports.createJob = async (req, res) => {
   try {
@@ -44,7 +45,6 @@ exports.getJobById = async (req, res) => {
 
 exports.matchJob = async (req, res) => {
   try {
-    const { generateEmbedding } = await import('../../ml/embedding.js');
     const { top_n } = req.body;
     const job = await Job.findById(req.params.id);
     if (!job) {
