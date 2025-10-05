@@ -1,3 +1,6 @@
+const { generateEmbedding } = require('../../ml/embedding');
+const { initPinecone } = require('../pinecone');
+
 exports.ask = async (req, res) => {
   try {
     const { query, k } = req.body;
@@ -5,11 +8,23 @@ exports.ask = async (req, res) => {
       return res.status(400).json({ message: 'Query is required' });
     }
 
-    // Placeholder for semantic search
-    const results = [
-      { resume_id: 'dummy_id_1', snippet: 'This is a dummy snippet for React experience.' },
-      { resume_id: 'dummy_id_2', snippet: 'Another dummy snippet for Node.js experience.' },
-    ];
+    const queryEmbedding = await generateEmbedding(query);
+    const pineconeIndex = await initPinecone();
+
+    const queryRequest = {
+      vector: queryEmbedding,
+      topK: k || 5,
+      includeMetadata: true,
+    };
+
+    const queryResponse = await pineconeIndex.query(queryRequest);
+
+    const results = queryResponse.matches.map(match => ({
+        resume_id: match.metadata.resume_id,
+        snippet: match.metadata.text,
+        score: match.score,
+    }));
+
 
     res.status(200).json({ results });
   } catch (error) {
