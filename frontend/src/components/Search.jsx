@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { RiSearch2Line, RiCloseLine } from 'react-icons/ri';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Search() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
-  const [showSearch, setShowSearch] = useState(false);
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    if (!query.trim()) return;
+
     try {
       const response = await fetch('http://localhost:5000/api/ask', {
         method: 'POST',
@@ -28,40 +29,36 @@ function Search() {
     }
   };
 
-  const toggleSearch = (e) => {
-    e.preventDefault();
-    setShowSearch(!showSearch);
-  };
-
   return (
-    <div className="container">
-      <h2>Search Resumes</h2>
-      <form className={`search ${showSearch ? 'show-search' : ''}`} onSubmit={handleSearch}>
-        <input
-          type="search"
-          placeholder="Type something..."
-          className="search__input"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <div className="search__button" onClick={toggleSearch}>
-          {showSearch ? (
-            <RiCloseLine className="ri-close-line search__close" />
-          ) : (
-            <RiSearch2Line className="ri-search-2-line search__icon" />
-          )}
-        </div>
-      </form>
+    <section className="content-section search-section">
+      <Container>
+        <Row>
+          <Col>
+            <div className="content-bx search-bx">
+              <h2>Search Resumes</h2>
+              <form onSubmit={handleSearch}>
+                <input
+                  type="search"
+                  placeholder="Type keywords like 'React developer with Python'..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                <button type="submit">Search</button>
+              </form>
 
-      <div>
-        {results.map((result, index) => (
-          <div key={index}>
-            <h3>{result.resume_id}</h3>
-            <p>{result.snippet}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+              <div className="search-results">
+                {results.map((result, index) => (
+                  <div key={index} className="search-result-item">
+                    <h3>{result.resume_id}</h3>
+                    <p>{result.snippet}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   );
 }
 

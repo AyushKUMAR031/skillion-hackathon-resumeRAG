@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { NavBar } from './components/NavBar';
+import Home from './components/Home';
 import FileUpload from './components/FileUpload';
 import Search from './components/Search';
 import Jobs from './components/Jobs';
@@ -10,12 +11,15 @@ function App() {
     <Router>
       <div className="App">
         <NavBar />
-        <Routes>
-          <Route path="/" element={<FileUpload />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route path="/candidates/:id" element={<Candidates />} />
-        </Routes>
+        <div className="page-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/upload" element={<FileUpload />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/jobs" element={<Jobs />} />
+            <Route path="/candidates/:id" element={<Candidates />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );

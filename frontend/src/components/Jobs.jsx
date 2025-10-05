@@ -41,41 +41,43 @@ function Jobs() {
   }, []);
 
   return (
-    <section className="jobs" id="jobs">
-        <Container>
-            <Row>
-                <Col>
-                    <h2>Create Job</h2>
-                    <form onSubmit={handleCreateJob}>
-                        <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        placeholder="Job Title"
-                        />
-                        <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        placeholder="Job Description"
-                        ></textarea>
-                        <button type="submit">Create Job</button>
-                    </form>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <hr />
-                    <h2>Existing Jobs</h2>
-                    <ul>
-                        {jobs.map((job) => (
-                        <li key={job._id}>
-                            <Link to={`/candidates/${job._id}`}>{job.title}</Link>
-                        </li>
-                        ))}
-                    </ul>
-                </Col>
-            </Row>
-        </Container>
+    <section className="content-section jobs-section">
+      <Container>
+        <Row>
+          <Col md={6}>
+            <div className="content-bx jobs-bx">
+              <h2>Create Job</h2>
+              <form onSubmit={handleCreateJob}>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Job Title"
+                />
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Job Description"
+                  rows="6"
+                ></textarea>
+                <button type="submit">Create Job</button>
+              </form>
+            </div>
+          </Col>
+          <Col md={6}>
+            <div className="content-bx jobs-bx">
+              <h2>Existing Jobs</h2>
+              <ul>
+                {jobs.map((job) => (
+                  <li key={job._id}>
+                    <Link to={`/candidates/${job._id}`}>{job.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 }
