@@ -111,3 +111,9 @@
 | **pooling**             | Token → sentence conversion  | Aggregates token embeddings    |
 | **normalize**           | Scale vectors to unit length | Improves similarity            |
 | **xenova/transformers** | JS library for embeddings    | Local alternative to OpenAI    |
+
+
+- You are correct that indexName is a constant, but that won't cause any problems when you upload a second resume. Here's why:
+    - The `resumes` index is like a folder: Think of the resumes index in Pinecone as a folder where you're going to store all your
+        resume chunks. You only need to create this "folder" once.
+    - So, you can upload as many resumes as you want, and all the chunks will be added to the same resumes index, ready to be searched.
