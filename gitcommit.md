@@ -80,3 +80,80 @@
     - M	frontend/src/App.jsx
     - A	frontend/src/components/Candidates.jsx
     - A	frontend/src/components/Jobs.jsx
+
+15. **Enable CORS on the backend**
+    - M	backend/package-lock.json
+    - M	backend/package.json
+    - M	backend/server.js
+    - A	backend/uploads/overleaf_sandBox.pdf
+    - M	context.md
+    - A	context2.md
+    - A	gitcommit.md
+    - M	roadmap.md
+
+16. **Add modern navbar and styles**
+    - A	.gitignore
+    - D	context.md
+    - D	context2.md
+    - M	frontend/package-lock.json
+    - M	frontend/package.json
+    - M	frontend/src/App.jsx
+    - A	frontend/src/components/NavBar.jsx
+    - M	frontend/src/index.css
+    - M	frontend/src/main.jsx
+    - D	gitcommit.md
+    - A	ml/ml-notes.md
+    - D	roadmap.md
+
+17. **Redesign Search component with animated search bar**
+    - M	frontend/src/components/Search.jsx
+    - M	frontend/src/index.css
+
+18. **Redesign FileUpload page with banner and new styling**
+    - M	frontend/package-lock.json
+    - M	frontend/package.json
+    - A	frontend/src/assets/header-img.svg
+    - A	frontend/src/assets/img/backGround-img.jpg
+    - A	frontend/src/assets/img/banner-bg.png
+    - A	frontend/src/assets/img/contact-img.svg
+    - A	frontend/src/assets/img/header-img.svg
+    - M	frontend/src/components/FileUpload.jsx
+    - M	frontend/src/index.css
+
+19. **Update Jobs and Candidates pages with new styling**
+    - M	frontend/src/components/Candidates.jsx
+    - M	frontend/src/components/Jobs.jsx
+
+20. **fix : Enhancing UI and removing bugs**
+    - A	context.md
+    - A	context2.md
+    - M	frontend/src/App.jsx
+    - D	frontend/src/assets/header-img.svg
+    - R100	frontend/src/assets/img/backGround-img.jpg	frontend/src/assets/img/background-bg.jpg
+    - D	frontend/src/assets/img/banner-bg.png
+    - D	frontend/src/assets/img/contact-img.svg
+    - M	frontend/src/assets/img/header-img.svg
+    - A	frontend/src/components/Banner.jsx
+    - M	frontend/src/components/Candidates.jsx
+    - M	frontend/src/components/FileUpload.jsx
+    - A	frontend/src/components/Home.jsx
+    - M	frontend/src/components/Jobs.jsx
+    - M	frontend/src/components/NavBar.jsx
+    - M	frontend/src/components/Search.jsx
+    - M	frontend/src/index.css
+    - A	gitcommit.md
+    - A	roadmap.md
+
+21. **fix : working on CSS and modifing the component**
+    - D	frontend/src/components/Banner.jsx
+    - M	frontend/src/components/FileUpload.jsx
+    - M	frontend/src/components/Home.jsx
+    - M	frontend/src/components/Search.jsx
+    - M	frontend/src/index.css
+
+22. **fix : removed excess CSS code**
+    - M	frontend/src/index.css
+
+23. **Removed sensitive or unnecessary files from repo**
+    - D	context.md
+    - D	context2.md
