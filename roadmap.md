@@ -33,7 +33,7 @@
 #### **Phase 2: Core Resume Management (Backend)**
 
 *   [x] **1. Resume Model:**
-    *   [x] Define `Resume` schema in `backend/models/Resume.js` (e.g., `filename`, `text`, `embedding`, `pii`).
+    *   [x] Define `Resume` schema in `backend/models/Resume.js` (e.g., `filename`, `text`, `redacted_text`).
 *   [x] **2. Resume Upload (`/api/resumes`):**
     *   [x] Implement file upload logic using `multer`.
     *   [x] Support both PDF and ZIP file uploads.
@@ -44,7 +44,8 @@
         *   [x] Create a service in the `ml` module to generate embeddings.
     *   [x] **Storage:**
         *   [x] Save the resume file to the `backend/uploads` directory.
-        *   [x] Save the extracted text and embeddings to Pinecone.
+        *   [x] Save the extracted and redacted text to MongoDB.
+        *   [x] Save the embeddings to Pinecone.
 *   [x] **3. Resume Retrieval (`/api/resumes`):**
     *   [x] Implement `GET /api/resumes` to list all resumes with pagination (`limit`, `offset`).
     *   [ ] Implement `GET /api/resumes?q=` for basic text search.
@@ -59,7 +60,7 @@
     *   [x] Return the top `k` matching resume snippets.
 *   [x] **2. Job & Candidate Matching:**
     *   [x] **Job Model:**
-        *   [x] Define `Job` schema in `backend/models/Job.js` (`title`, `description`, `embedding`).
+        *   [x] Define `Job` schema in `backend/models/Job.js` (`title`, `description`).
     *   [x] **Job API (`/api/jobs`):**
         *   [x] Implement `POST /api/jobs` to create a new job posting.
         *   [x] Implement `GET /api/jobs` to retrieve all jobs.
@@ -73,7 +74,7 @@
 #### **Phase 4: Frontend Development (`frontend` directory)**
 
 *   [x] **1. Project Setup:**
-    *   [x] Set up a new React application (`npx create-react-app frontend`).
+    *   [x] Set up a new React application.
 *   [x] **2. UI Pages:**
     *   [x] **`/upload`:** A page with a file upload form for resumes.
     *   [x] **`/search`:** A page with a search bar to query resumes (`/api/ask`).
@@ -85,11 +86,11 @@
 
 #### **Phase 5: Final Touches & Deployment**
 
-*   [ ] **1. PII Redaction:**
-    *   [ ] Implement logic to identify and redact Personally Identifiable Information (PII) from resumes.
+*   [x] **1. PII Redaction:**
+    *   [x] Implement logic to identify and redact Personally Identifiable Information (PII) from resumes (emails and phone numbers).
     *   [ ] Only show unredacted PII to authorized users (e.g., recruiters).
-*   [ ] **2. Deterministic Rankings:**
-    *   [ ] Ensure that search and matching results are consistent and reproducible.
+*   [x] **2. Deterministic Rankings:**
+    *   [x] Ensure that search and matching results are consistent and reproducible.
 *   [ ] **3. Testing:**
     *   [ ] Test all API endpoints.
     *   [ ] Test the frontend components.
@@ -106,7 +107,12 @@
     *   [x] A modern, translucent navbar.
     *   [x] A consistent background image across all pages.
     *   [x] Improved styling for forms and content boxes.
+    *   [x] Toast notifications for user feedback.
+    *   [x] Modal window to view full job descriptions.
+    *   [x] Modal window to view full resume text.
 *   [x] **Code Refactoring:**
     *   [x] Refactored the frontend by merging the `Banner.jsx` component into `Home.jsx`.
     *   [x] Removed unused CSS.
+    *   [x] Refactored the backend to move the `ml` service into the `backend` directory.
 *   [x] **Zip File Upload:** Implemented and fixed the zip file upload functionality to handle multiple resumes.
+*   [x] **Improved Candidate Ranking:** Implemented a more accurate candidate ranking algorithm based on the average score of all matching resume chunks.

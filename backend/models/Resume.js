@@ -9,12 +9,9 @@ const ResumeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  embedding: {
-    type: Array,
+  redacted_text: {
+    type: String,
   },
-  pii: {
-    type: Object,
-  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Resume', ResumeSchema);

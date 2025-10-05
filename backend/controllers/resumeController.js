@@ -4,19 +4,23 @@ const fs = require('fs');
 const JSZip = require('jszip');
 const { initPinecone } = require('../pinecone');
 const { generateEmbedding } = require('../ml/embedding.js');
+const { redactPII } = require('../utils/pii');
 
 async function processResume(text, filename) {
+
+    const redactedText = redactPII(text);
 
     const newResume = new Resume({
         filename,
         text, // We can still save the full text for reference
+        redacted_text: redactedText,
     });
 
     const savedResume = await newResume.save();
 
     // Chunking and embedding
     const pineconeIndex = await initPinecone();
-    const chunks = chunkText(text);
+    const chunks = chunkText(redactedText); // Use redacted text for embeddings
     const vectors = [];
 
     for (let i = 0; i < chunks.length; i++) {
