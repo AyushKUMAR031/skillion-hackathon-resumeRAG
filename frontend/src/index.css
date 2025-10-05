@@ -41,6 +41,11 @@ nav.navbar {
     z-index: 9999;
     transition:  0.32s ease-in-out;
 }
+nav.navbar.scrolled {
+    padding: 0px 0;
+    background-color: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+}
 nav.navbar a.navbar-brand {
     width: 9%;
     color: #fff !important;

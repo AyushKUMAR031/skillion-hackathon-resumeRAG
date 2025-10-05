@@ -32,12 +32,21 @@ function Jobs() {
   };
 
   useEffect(() => {
-    // Fetch existing jobs (dummy data for now)
-    const dummyJobs = [
-      { _id: 'job1', title: 'Frontend Developer' },
-      { _id: 'job2', title: 'Backend Developer' },
-    ];
-    setJobs(dummyJobs);
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/jobs');
+        if (response.ok) {
+          const data = await response.json();
+          setJobs(data);
+        } else {
+          console.error('Failed to fetch jobs');
+        }
+      } catch (error) {
+        console.error('Error fetching jobs:', error);
+      }
+    };
+
+    fetchJobs();
   }, []);
 
   return (
