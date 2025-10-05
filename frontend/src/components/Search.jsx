@@ -14,7 +14,7 @@ function Search() {
     if (!query.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:5000/api/ask', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/ask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Search() {
 
   const handleShowModal = async (resumeId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/resumes/${resumeId}`);
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/resumes/${resumeId}`);
       if (response.ok) {
         const data = await response.json();
         setSelectedResume(data.text);

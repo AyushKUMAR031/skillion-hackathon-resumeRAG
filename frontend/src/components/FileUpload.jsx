@@ -25,7 +25,7 @@ function FileUpload() {
     formData.append("resume", file);
 
     try {
-      const response = await fetch("http://localhost:5000/api/resumes", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/resumes`, {
         method: "POST",
         body: formData,
       });

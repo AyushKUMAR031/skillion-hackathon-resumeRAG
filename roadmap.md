@@ -93,10 +93,10 @@
     *   [x] Ensure that search and matching results are consistent and reproducible.
 *   [ ] **3. Testing:**
     *   [ ] Test all API endpoints.
-    *   [ ] Test the frontend components.
+    *   [x] Test the frontend components.
 *   [ ] **4. Deployment:**
-    *   [ ] Prepare the application for deployment.
-    *   [ ] Deploy the backend and frontend to a hosting service.
+    *   [x] Prepare the application for deployment.
+    *   [x] Deploy the backend and frontend to a hosting service.
 
 ---
 

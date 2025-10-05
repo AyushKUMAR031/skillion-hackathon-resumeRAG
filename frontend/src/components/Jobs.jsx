@@ -14,7 +14,7 @@ function Jobs() {
   const handleCreateJob = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/jobs', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/jobs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ function Jobs() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/jobs');
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/jobs`);
         if (response.ok) {
           const data = await response.json();
           setJobs(data);

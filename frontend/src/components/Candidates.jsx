@@ -13,7 +13,7 @@ function Candidates() {
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/jobs/${id}/match`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}/match`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function Candidates() {
 
   const handleShowModal = async (resumeId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/resumes/${resumeId}`);
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/resumes/${resumeId}`);
       if (response.ok) {
         const data = await response.json();
         setSelectedResume(data.text);
