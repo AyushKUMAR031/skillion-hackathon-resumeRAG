@@ -1,8 +1,8 @@
-const { generateEmbedding } = require('../../ml/embedding');
 const { initPinecone } = require('../pinecone');
 
 exports.ask = async (req, res) => {
   try {
+    const { generateEmbedding } = await import('../../ml/embedding.js');
     const { query, k } = req.body;
     if (!query) {
       return res.status(400).json({ message: 'Query is required' });

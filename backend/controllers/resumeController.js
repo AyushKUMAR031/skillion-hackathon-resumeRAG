@@ -2,11 +2,12 @@ const Resume = require('../models/Resume');
 const pdf = require('pdf-parse');
 const fs = require('fs');
 const JSZip = require('jszip');
-const { generateEmbedding } = require('../../ml/embedding');
 const { initPinecone } = require('../pinecone');
 
 exports.uploadResume = async (req, res) => {
+  console.log('Inside uploadResume');
   try {
+    const { generateEmbedding } = await import('../../ml/embedding.js');
     if (!req.file) {
       return res.status(400).json({ message: 'No file uploaded' });
     }
@@ -59,6 +60,7 @@ exports.uploadResume = async (req, res) => {
 
     res.status(201).json({ message: 'Resume uploaded, parsed, and embedded successfully', resume: savedResume });
   } catch (error) {
+    console.error('Error in uploadResume:', error);
     res.status(500).json({ message: error.message });
   }
 };

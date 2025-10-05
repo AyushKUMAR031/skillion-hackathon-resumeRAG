@@ -1,5 +1,4 @@
 const Job = require('../models/Job');
-const { generateEmbedding } = require('../../ml/embedding');
 const { initPinecone } = require('../pinecone');
 
 exports.createJob = async (req, res) => {
@@ -22,6 +21,15 @@ exports.createJob = async (req, res) => {
   }
 };
 
+exports.getJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find();
+    res.status(200).json(jobs);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 exports.getJobById = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
@@ -36,6 +44,7 @@ exports.getJobById = async (req, res) => {
 
 exports.matchJob = async (req, res) => {
   try {
+    const { generateEmbedding } = await import('../../ml/embedding.js');
     const { top_n } = req.body;
     const job = await Job.findById(req.params.id);
     if (!job) {
